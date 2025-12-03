@@ -4,84 +4,105 @@ API_BASE = "http://127.0.0.1:8080"
 
 
 def insert_account():
-    acc_id = input("Enter Account ID: ")
-    name = input("Enter Name: ")
-    balance = float(input("Enter Initial Balance: "))
+    try:
+        acc_id = input("Enter Account ID: ")
+        name = input("Enter Name: ")
+        balance = float(input("Enter Initial Balance: "))
 
-    payload = {
-        "account_id": acc_id,
-        "name": name,
-        "balance": balance
-    }
+        payload = {
+            "account_id": acc_id,
+            "name": name,
+            "balance": balance
+        }
 
-    response = requests.post(f"{API_BASE}/account/insert", json=payload)
-    print("\nResponse:", response.json())
+        response = requests.post(f"{API_BASE}/account/insert", json=payload)
+        print("\nResponse:", response.json())
+    except Exception as e:
+        print("Error:", e)
 
 
 def update_account():
-    acc_id = input("Enter Account ID to update: ")
-    name = input("Enter new name: ")
+    try:
+        acc_id = input("Enter Account ID to update: ")
+        name = input("Enter new name: ")
 
-    payload = {
-        "account_id": acc_id,
-        "name": name,
-        "balance": 0  
-    }
+        payload = {
+            "account_id": acc_id,
+            "name": name,
+            "balance": 0  
+        }
 
-    response = requests.post(f"{API_BASE}/account/update", json=payload)
-    print("\nResponse:", response.json())
+        response = requests.post(f"{API_BASE}/account/update", json=payload)
+        print("\nResponse:", response.json())
+    except Exception as e:
+        print("Error:", e)
 
 
 def delete_account():
-    acc_id = input("Enter Account ID to delete: ")
-    response = requests.get(f"{API_BASE}/account/delete/{acc_id}")
-    print("\nResponse:", response.json())
-
+    try:
+        acc_id = input("Enter Account ID to delete: ")
+        response = requests.get(f"{API_BASE}/account/delete/{acc_id}")
+        print("\nResponse:", response.json())
+    except Exception as e:
+        print("Error:", e)
 
 def show_accounts():
-    response = requests.get(f"{API_BASE}/account/list")
-    print("\nAll Accounts:", response.json()["accounts"])
-
+    try:
+        response = requests.get(f"{API_BASE}/account/list")
+        print("\nAll Accounts:", response.json()["accounts"])
+    except Exception as e:
+        print("Error:", e)
 
 def deposit():
-    acc_id = input("Enter Account ID: ")
-    amount = float(input("Enter deposit amount: "))
+    try:
+        acc_id = input("Enter Account ID: ")
+        amount = float(input("Enter deposit amount: "))
 
-    payload = {"account_id": acc_id, "amount": amount}
-    response = requests.post(f"{API_BASE}/bank/deposit", json=payload)
-    print("\nResponse:", response.json())
+        payload = {"account_id": acc_id, "amount": amount}
+        response = requests.post(f"{API_BASE}/bank/deposit", json=payload)
+        print("\nResponse:", response.json())
+    except Exception as e:
+        print("Error:", e)
 
 
 
 def withdraw():
-    acc_id = input("Enter Account ID: ")
-    amount = float(input("Enter withdraw amount: "))
+    try:
+        acc_id = input("Enter Account ID: ")
+        amount = float(input("Enter withdraw amount: "))
 
-    payload = {"account_id": acc_id, "amount": amount}
-    response = requests.post(f"{API_BASE}/bank/withdraw", json=payload)
-    print("\nResponse:", response.json())
+        payload = {"account_id": acc_id, "amount": amount}
+        response = requests.post(f"{API_BASE}/bank/withdraw", json=payload)
+        print("\nResponse:", response.json())
+    except Exception as e:
+        print("Error:", e)
 
 
 def transfer():
-    from_acc = input("From Account ID: ")
-    to_acc = input("To Account ID: ")
-    amount = float(input("Enter transfer amount: "))
+    try:
+        from_acc = input("From Account ID: ")
+        to_acc = input("To Account ID: ")
+        amount = float(input("Enter transfer amount: "))
 
-    payload = {
-        "from_acc": from_acc,
-        "to_acc": to_acc,
-        "amount": amount
-    }
-
-    response = requests.post(f"{API_BASE}/bank/transfer", json=payload)
-    print("\nResponse:", response.json())
+        payload = {
+            "from_acc": from_acc,
+            "to_acc": to_acc,
+            "amount": amount
+        }
+        response = requests.post(f"{API_BASE}/bank/transfer", json=payload)
+    except Exception as e:
+        print("Error:", e)
 
 
 def show_transactions():
-    response = requests.get(f"{API_BASE}/transactions")
-    print("\nTransaction Logs:")
-    for log in response.json()["logs"]:
-        print(log.strip())
+    try:
+        response = requests.get(f"{API_BASE}/transactions")
+        print("\nTransaction Logs:")
+        for log in response.json()["logs"]:
+            print(log.strip())
+        print("\nResponse:", response.json())
+    except Exception as e:
+        print("Error:", e)
 
 
 def menu():
